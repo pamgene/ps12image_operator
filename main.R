@@ -8,13 +8,11 @@ get_file_tags <- function(filename) {
   tag_dump <- system(paste0("tiffdump '", filename, "'"), intern = TRUE)
   tags     <- tag_dump[grepl("^DateTime|650", tag_dump)]
   tags     <- unlist(lapply(tags, FUN = function(tag) {
-    tag_name <- unlist(strsplit(tag, " "))[1]
-    tag_value <- unlist(strsplit(tag, "<"))[2]
-    res <- substr(tag_value, 1, nchar(tag_value) - 3)
-    names(res) <- tag_name
-    res
+    tag_name   <- unlist(strsplit(tag, " "))[1]
+    tag_value  <- unlist(strsplit(tag, "<"))[2]
+    substr(tag_value, 1, nchar(tag_value) - 3)
   }))
-  # replace names
+  # set names
   names(tags) <- TAG_NAMES
   tags
 }
@@ -51,6 +49,7 @@ doc_to_data <- function(df){
   result %>% 
     mutate(path = "ImageResults") %>% 
     mutate(documentId = docId) %>%
+    mutate_at(vars(Col, Cycle, 'Exposure Time', Row, Temperature), .funs = function(x) { as.integer(as.character(x)) }) %>%
     select(documentId, path, IMAGE_COL, TAG_NAMES)
 }
 

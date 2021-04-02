@@ -2,9 +2,9 @@ library(tercen)
 library(dplyr)
 
 #options("tercen.serviceUri"="http://tercen:5400/api/v1/")
-# http://127.0.0.1:5402/admin/w/050e773677ecc404aa5d5a7580016b7d/ds/a7cd2965-0444-441a-98f3-142cc5522efa
+# http://127.0.0.1:5402/admin/w/050e773677ecc404aa5d5a7580016b7d/ds/abfcd4c4-36ec-4841-ab7e-2f03a451e720
 options("tercen.workflowId"= "050e773677ecc404aa5d5a7580016b7d")
-options("tercen.stepId"= "a7cd2965-0444-441a-98f3-142cc5522efa")
+options("tercen.stepId"= "abfcd4c4-36ec-4841-ab7e-2f03a451e720")
 options("tercen.username"= "admin")
 options("tercen.password"= "admin")
 
@@ -15,13 +15,11 @@ get_file_tags <- function(filename) {
   tag_dump <- system(paste0("tiffdump '", filename, "'"), intern = TRUE)
   tags     <- tag_dump[grepl("^DateTime|650", tag_dump)]
   tags     <- unlist(lapply(tags, FUN = function(tag) {
-    tag_name <- unlist(strsplit(tag, " "))[1]
-    tag_value <- unlist(strsplit(tag, "<"))[2]
-    res <- substr(tag_value, 1, nchar(tag_value) - 3)
-    names(res) <- tag_name
-    res
+    tag_name   <- unlist(strsplit(tag, " "))[1]
+    tag_value  <- unlist(strsplit(tag, "<"))[2]
+    substr(tag_value, 1, nchar(tag_value) - 3)
   }))
-  # replace names
+  # set names
   names(tags) <- TAG_NAMES
   tags
 }
@@ -58,6 +56,7 @@ doc_to_data <- function(df){
   result %>% 
     mutate(path = "ImageResults") %>% 
     mutate(documentId = docId) %>%
+    mutate_at(vars(Col, Cycle, 'Exposure Time', Row, Temperature), .funs = function(x) { as.integer(as.character(x)) }) %>%
     select(documentId, path, IMAGE_COL, TAG_NAMES)
 }
 
