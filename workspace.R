@@ -1,12 +1,11 @@
 library(tercen)
 library(dplyr)
 
-#http://127.0.0.1:5402/admin/w/050e773677ecc404aa5d5a7580016b7d/ds/712a71ec-3fa3-49c6-820e-655a7a25e20f
-#options("tercen.serviceUri"="http://tercen:5400/api/v1/")
-options("tercen.workflowId"= "050e773677ecc404aa5d5a7580016b7d")
-options("tercen.stepId"= "712a71ec-3fa3-49c6-820e-655a7a25e20f")
-options("tercen.username"= "admin")
-options("tercen.password"= "admin")
+# options("tercen.serviceUri"="http://tercen:5400/api/v1/")
+# options("tercen.workflowId"= "050e773677ecc404aa5d5a7580016b7d")
+# options("tercen.stepId"= "712a71ec-3fa3-49c6-820e-655a7a25e20f")
+# options("tercen.username"= "admin")
+# options("tercen.password"= "admin")
 
 TAG_NAMES <- c("DateTime", "Barcode", "Col", "Cycle", "Exposure Time", "Filter", "PS12", "Row", "Temperature", "Timestamp", "Instrument unit", "Protocol ID")
 IMAGE_COL <- "Image"
