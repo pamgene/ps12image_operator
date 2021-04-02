@@ -67,6 +67,5 @@ if (!any(ctx$cnames == "documentId")) stop("Column factor documentId is required
 
 ctx$cselect() %>%
   doc_to_data() %>%
-  print()
-  #ctx$addNamespace() %>%
-  #ctx$save()
+  ctx$addNamespace() %>%
+  ctx$save()
