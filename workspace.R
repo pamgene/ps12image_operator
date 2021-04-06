@@ -1,12 +1,12 @@
 library(tercen)
 library(dplyr)
 
+# Set appropriate options
 #options("tercen.serviceUri"="http://tercen:5400/api/v1/")
-# http://127.0.0.1:5402/admin/w/050e773677ecc404aa5d5a7580016b7d/ds/abfcd4c4-36ec-4841-ab7e-2f03a451e720
-options("tercen.workflowId"= "050e773677ecc404aa5d5a7580016b7d")
-options("tercen.stepId"= "abfcd4c4-36ec-4841-ab7e-2f03a451e720")
-options("tercen.username"= "admin")
-options("tercen.password"= "admin")
+#options("tercen.workflowId"= "050e773677ecc404aa5d5a7580016b7d")
+#options("tercen.stepId"= "6a509b68-33a3-4397-9b9c-12696ce2ffac")
+#options("tercen.username"= "admin")
+#options("tercen.password"= "admin")
 
 TAG_NAMES <- c("DateTime", "Barcode", "Col", "Cycle", "Exposure Time", "Filter", "PS12", "Row", "Temperature", "Timestamp", "Instrument unit", "Protocol ID")
 IMAGE_COL <- "Image"
@@ -42,7 +42,7 @@ doc_to_data <- function(df){
   }
   
   # read tags
-  result <- do.call(rbind, lapply(f.names[1:10], FUN = function(filename) {
+  result <- do.call(rbind, lapply(f.names, FUN = function(filename) {
     tags <- get_file_tags(filename)
     
     # image
