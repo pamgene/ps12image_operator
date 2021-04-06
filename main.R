@@ -49,7 +49,7 @@ doc_to_data <- function(df){
   result %>% 
     mutate(path = "ImageResults") %>% 
     mutate(documentId = docId) %>%
-    mutate_at(vars(Col, Cycle, 'Exposure Time', Row, Temperature), .funs = function(x) { as.integer(as.character(x)) }) %>%
+    mutate_at(vars(Col, Cycle, 'Exposure Time', Row, Temperature), .funs = function(x) { as.numeric(as.character(x)) }) %>%
     select(documentId, path, IMAGE_COL, TAG_NAMES)
 }
 
