@@ -1,5 +1,6 @@
 library(tercen)
 library(dplyr)
+library(ijtiff)
 
 # Set appropriate options
 #options("tercen.serviceUri"="http://tercen:5400/api/v1/")
@@ -8,19 +9,19 @@ library(dplyr)
 #options("tercen.username"= "admin")
 #options("tercen.password"= "admin")
 
-TAG_NAMES <- c("DateTime", "Barcode", "Col", "Cycle", "Exposure Time", "Filter", "PS12", "Row", "Temperature", "Timestamp", "Instrument unit", "Protocol ID")
+TAG_LIST  <- list("date_time" = "DateTime", "barcode" = "Barcode", "col" = "Col", "cycle" = "Cycle", "exposure time" = "Exposure Time", "filter" = "Filter", 
+                  "ps12" = "PS12", "row" = "Row", "temperature" = "Temperature", "timestamp" = "Timestamp", "instrument unit" = "Instrument Unit", "protocol id" = "Protocol ID")
+TAG_NAMES <- as.vector(unlist(TAG_LIST))
 IMAGE_COL <- "Image"
 
 get_file_tags <- function(filename) {
-  tag_dump <- system(paste0("tiffdump '", filename, "'"), intern = TRUE)
-  tags     <- tag_dump[grepl("^DateTime|650", tag_dump)]
-  tags     <- unlist(lapply(tags, FUN = function(tag) {
-    tag_name   <- unlist(strsplit(tag, " "))[1]
-    tag_value  <- unlist(strsplit(tag, "<"))[2]
-    substr(tag_value, 1, nchar(tag_value) - 3)
-  }))
-  # set names
-  names(tags) <- TAG_NAMES
+  tags <- NULL
+  all_tags <- ijtiff::read_tags(filename)
+  if (!is.null(all_tags) && !is.null(names(all_tags)) && "frame1" %in% names(all_tags)) {
+    tags <- all_tags$frame1
+    tags <- tags[names(TAG_LIST)]
+    names(tags) <- TAG_NAMES
+  }
   tags
 }
 
@@ -50,9 +51,9 @@ doc_to_data <- function(df){
     image <- gsub(".tif", "", filename_parts[length(filename_parts)])
     names(image) <- IMAGE_COL
     
-    # merge result
-    as.data.frame(t(as.data.frame(c(image, tags))))
-  })) 
+    as.data.frame(t(as.data.frame(c(image, unlist(tags)))))
+  }))
+  
   result %>% 
     mutate(path = "ImageResults") %>% 
     mutate(documentId = docId) %>%
