@@ -35,7 +35,7 @@ doc_to_data <- function(df){
   }
   
   # read tags
-  result <- do.call(rbind, lapply(f.names[1:10], FUN = function(filename) {
+  result <- do.call(rbind, lapply(f.names, FUN = function(filename) {
     tags <- get_file_tags(filename)
     
     # image
