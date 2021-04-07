@@ -120,6 +120,18 @@
       "Repository": "CRAN",
       "Hash": "d4e25697c450c01b202c79ef35694a83"
     },
+    "ijtiff": {
+      "Package": "ijtiff",
+      "Version": "2.2.6",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "ijtiff",
+      "RemoteUsername": "tercen",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "6006dc7ce8f926a8fb0f6ff59a2468e027c669ec",
+      "Hash": "520e67f623504c7ea3e6d6eeba6d08c2"
+    },
     "magrittr": {
       "Package": "magrittr",
       "Version": "1.5",
