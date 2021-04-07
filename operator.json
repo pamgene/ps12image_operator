@@ -1,5 +1,5 @@
 {
-  "name": "ps12image operator",
+  "name": "PS12 images",
   "description": "Convert a zip file of tif images to a Tercen data set.",
   "tags": ["tif", "import"],
   "authors": ["tercen"],
