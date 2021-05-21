@@ -3,7 +3,7 @@ library(dplyr)
 library(ijtiff)
 
 TAG_LIST  <- list("date_time" = "DateTime", "barcode" = "Barcode", "col" = "Col", "cycle" = "Cycle", "exposure time" = "Exposure Time", "filter" = "Filter", 
-                  "ps12" = "PS12", "row" = "Row", "temperature" = "Temperature", "timestamp" = "Timestamp", "instrument unit" = "Instrument Unit", "protocol id" = "Protocol ID")
+                  "ps12" = "PS12", "row" = "Row", "temperature" = "Temperature", "timestamp" = "Timestamp", "instrument unit" = "Instrument Unit", "run id" = "RunId")
 TAG_NAMES <- as.vector(unlist(TAG_LIST))
 IMAGE_COL <- "Image"
 

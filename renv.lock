@@ -163,9 +163,9 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "ijtiff",
       "RemoteUsername": "tercen",
-      "RemoteRef": "v2.2.5-pamgene",
-      "RemoteSha": "34553a3845b112d5c93b603ebdb05b05a1d0dfc5",
-      "Hash": "1da45b512f67d8d557a8a82ab294672a"
+      "RemoteRef": "v2.2.6-pamgene",
+      "RemoteSha": "15c7c2854b14f817f7164f550aec91c562d943ac",
+      "Hash": "8755ab1919962299f998b7ce14dba2d7"
     },
     "lifecycle": {
       "Package": "lifecycle",
