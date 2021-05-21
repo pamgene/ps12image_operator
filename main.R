@@ -13,6 +13,7 @@ get_file_tags <- function(filename) {
   if (!is.null(all_tags) && !is.null(names(all_tags)) && "frame1" %in% names(all_tags)) {
     tags <- all_tags$frame1
     tags <- tags[names(TAG_LIST)]
+    tags <- lapply(tags, FUN = function(x) ifelse(is.null(x), "", x))
     names(tags) <- TAG_NAMES
   }
   tags
