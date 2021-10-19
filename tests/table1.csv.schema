@@ -1,0 +1,76 @@
+{
+  "kind": "TableSchema",
+  "columns": [
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Image",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.DateTime",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Barcode",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Col",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Cycle",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Exposure Time",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Filter",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.PS12",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Row",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Temperature",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Timestamp",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.Instrument Unit",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.RunId",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": ".ci",
+      "type": "int32"
+    }
+  ]
+}
+
