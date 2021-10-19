@@ -1,0 +1,16 @@
+{
+  "kind": "OperatorUnitTest",
+  "name": "test",
+  "namespace": "ds0",
+  "inputFileUris": ["pg_data.zip"],
+  "inputDataUri": "input.csv",
+  "outputDataUri": ["table1.csv","table2.csv"],
+  "columns": ["documentId"],
+  "rows": [],
+  "colors": [],
+  "labels": [],
+  "yAxis": "",
+  "xAxis": "",
+  "absTol": 1e-15,
+  "relTol": 1e-15
+}
