@@ -52,7 +52,7 @@ doc_to_data <- function(df){
     mutate(path = "ImageResults") %>% 
     mutate(documentId = docId) %>%
     mutate_at(vars(Col, Cycle, 'Exposure Time', Row, Temperature), .funs = function(x) { as.numeric(as.character(x)) }) %>%
-    select(documentId, path, all_of(IMAGE_COL), all_of(TAG_NAMES))
+    select(all_of(IMAGE_COL), all_of(TAG_NAMES))
 }
 
 ctx = tercenCtx()
@@ -61,6 +61,6 @@ if (!any(ctx$cnames == "documentId")) stop("Column factor documentId is required
 
 ctx$cselect() %>%
   doc_to_data() %>%
-  mutate(.ci = as.integer(0), .ri = as.integer(0)) %>%
+  mutate(.ci = as.integer(0)) %>%
   ctx$addNamespace() %>%
   ctx$save()
