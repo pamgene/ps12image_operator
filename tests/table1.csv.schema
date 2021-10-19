@@ -34,7 +34,7 @@
     {
       "kind": "ColumnSchema",
       "name": "ds0.Filter",
-      "type": "double"
+      "type": "string"
     },
     {
       "kind": "ColumnSchema",
