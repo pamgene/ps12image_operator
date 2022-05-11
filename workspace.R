@@ -2,12 +2,13 @@ library(tercen)
 library(dplyr)
 library(ijtiff)
 
+library(tim)
+# http://127.0.0.1:5402/test-team/w/cc41c236da58dcb568c6fe1a320140d2/ds/fc1751eb-fe65-4c62-875f-c32339f6bdbb
 # Set appropriate options
 #options("tercen.serviceUri"="http://tercen:5400/api/v1/")
-#options("tercen.workflowId"= "050e773677ecc404aa5d5a7580016b7d")
-#options("tercen.stepId"= "6a509b68-33a3-4397-9b9c-12696ce2ffac")
-#options("tercen.username"= "admin")
-#options("tercen.password"= "admin")
+options("tercen.workflowId"= "cc41c236da58dcb568c6fe1a320140d2")
+options("tercen.stepId"= "fc1751eb-fe65-4c62-875f-c32339f6bdbb")
+
 
 TAG_LIST  <- list("date_time" = "DateTime", "barcode" = "Barcode", "col" = "Col", "cycle" = "Cycle", "exposure time" = "Exposure Time", "filter" = "Filter", 
                   "ps12" = "PS12", "row" = "Row", "temperature" = "Temperature", "timestamp" = "Timestamp", "instrument unit" = "Instrument Unit", "run id" = "RunId")
@@ -26,23 +27,14 @@ get_file_tags <- function(filename) {
   tags
 }
 
+
 doc_to_data <- function(df){
   #1. extract files
   docId = df$documentId[1]
-  doc = ctx$client$fileService$get(docId)
-  filename = tempfile()
-  writeBin(ctx$client$fileService$download(docId), filename)
-  on.exit(unlink(filename))
   
-  # unzip if archive
-  if(length(grep(".zip", doc$name)) > 0) {
-    tmpdir <- tempfile()
-    unzip(filename, exdir = tmpdir)
-    f.names <- list.files(file.path(list.files(tmpdir, full.names = TRUE), "ImageResults"), full.names = TRUE)
-  } else {
-    f.names <- filename
-  }
-  
+  f.names <- tim::load_data(ctx, docId, force_load=FALSE)
+  f.names <- grep('*/ImageResults/*', f.names, value = TRUE )
+
   # read tags
   result <- do.call(rbind, lapply(f.names, FUN = function(filename) {
     tags <- get_file_tags(filename)

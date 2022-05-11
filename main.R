@@ -22,19 +22,9 @@ get_file_tags <- function(filename) {
 doc_to_data <- function(df){
   #1. extract files
   docId = df$documentId[1]
-  doc = ctx$client$fileService$get(docId)
-  filename = tempfile()
-  writeBin(ctx$client$fileService$download(docId), filename)
-  on.exit(unlink(filename))
   
-  # unzip if archive
-  if(length(grep(".zip", doc$name)) > 0) {
-    tmpdir <- tempfile()
-    unzip(filename, exdir = tmpdir)
-    f.names <- list.files(file.path(list.files(tmpdir, full.names = TRUE), "ImageResults"), full.names = TRUE)
-  } else {
-    f.names <- filename
-  }
+  f.names <- tim::load_data(ctx, docId, force_load=FALSE)
+  f.names <- grep('*/ImageResults/*', f.names, value = TRUE )
   
   # read tags
   result <- do.call(rbind, lapply(f.names, FUN = function(filename) {
@@ -52,8 +42,9 @@ doc_to_data <- function(df){
     mutate(path = "ImageResults") %>% 
     mutate(documentId = docId) %>%
     mutate_at(vars(Col, Cycle, 'Exposure Time', Row, Temperature), .funs = function(x) { as.numeric(as.character(x)) }) %>%
-    select(all_of(IMAGE_COL), all_of(TAG_NAMES))
+    select(documentId, path, all_of(IMAGE_COL), all_of(TAG_NAMES))
 }
+
 
 ctx = tercenCtx()
 
