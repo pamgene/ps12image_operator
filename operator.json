@@ -3,6 +3,6 @@
   "description": "Convert a zip file of tif images to a Tercen data set.",
   "tags": ["tif", "import"],
   "authors": ["tercen"],
-  "urls": ["https://github.com/tercen/ps12image_operator"],
+  "urls": ["https://github.com/pamgene/ps12image_operator"],
   "properties": []
 }
