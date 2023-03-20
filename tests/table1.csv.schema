@@ -3,6 +3,16 @@
   "columns": [
     {
       "kind": "ColumnSchema",
+      "name": "ds0.documentId",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.path",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
       "name": "ds0.Image",
       "type": "string"
     },

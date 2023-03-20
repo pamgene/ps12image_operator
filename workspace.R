@@ -3,9 +3,7 @@ library(dplyr)
 library(ijtiff)
 
 library(tim)
-# http://127.0.0.1:5402/test-team/w/cc41c236da58dcb568c6fe1a320140d2/ds/fc1751eb-fe65-4c62-875f-c32339f6bdbb
-# Set appropriate options
-#options("tercen.serviceUri"="http://tercen:5400/api/v1/")
+
 options("tercen.workflowId"= "cc41c236da58dcb568c6fe1a320140d2")
 options("tercen.stepId"= "fc1751eb-fe65-4c62-875f-c32339f6bdbb")
 
