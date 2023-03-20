@@ -2,7 +2,7 @@
 
 #### Description
 
-`ps12image` operator extracts tags from tiff images.
+`ps12image` operator extracts tags from tiff images. 
 
 ##### Usage
 
