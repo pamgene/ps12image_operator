@@ -26,6 +26,13 @@ doc_to_data <- function(df){
   f.names <- tim::load_data(ctx, docId, force_load=FALSE)
   f.names <- grep('*/ImageResults/*', f.names, value = TRUE )
   
+  inc_files <- unlist(lapply(f.names, function(x){
+    str_to_lower(file_ext(x)) %in% c("tif", "tiff")
+  }))
+  
+  
+  f.names <- f.names[inc_files]
+  
   # read tags
   result <- do.call(rbind, lapply(f.names, FUN = function(filename) {
     tags <- get_file_tags(filename)
