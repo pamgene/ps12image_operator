@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: tercen/ps12image_rust_operator
+  IMAGE_NAME: pamgene/ps12image_operator
 
 jobs:
   build-and-push-image:

@@ -1,6 +1,6 @@
-# ps12image_rust_operator — maintenance guide
+# ps12image_operator — maintenance guide (Rust, 2.0.0+)
 
-Pure-Rust port of `pamgene/ps12image_operator` (R, 1.2.2): extracts PS12
+Rust implementation of this operator (the R version is tag 1.2.2 of this repo; the port was developed in tercen/ps12image_rust_operator and merged here with its history): extracts PS12
 TIFF metadata from a PamStation image ZIP into one table row per image.
 No pixel processing.
 
@@ -47,7 +47,7 @@ no Seed setting needed.
 
 1. Never point `operator.json`'s `container` at `:main`/`:latest`.
 2. Before tagging `X.Y.Z`: set `"container":
-   "ghcr.io/tercen/ps12image_rust_operator:X.Y.Z"`, commit, then tag the
+   "ghcr.io/pamgene/ps12image_operator:X.Y.Z"`, commit, then tag the
    same `X.Y.Z`. The release workflow pushes the image before its
    install-check runs.
 3. The install-check is fatal by design — a red release burns a patch
@@ -57,6 +57,13 @@ no Seed setting needed.
 
 ## Memory model
 
-`memory_model.json`: 600 MB floor + 0.02 MB/cell. The dominant cost is
-the in-memory ZIP (~60-120 MB) + extraction; metadata rows are trivial.
-Refit against `stats_d_actual_ram_peak` task metas if exit-137 appears.
+`memory_model.json` declares a constant 200 MiB (featureless `intercept`; see
+README "Memory" for why a constant and for the MiB/`offset*1.5` traps). The
+operator is constant-RAM: measured max RSS 6.25 MiB on a 311 MB / 1000-image
+archive. Refit against `stats_d_actual_ram_peak_anon` task metas if exit-137
+ever appears.
+
+## Two Tercen unit tests
+
+- `tests/test.json` — 4 images from `tercen/pamchip_grid_dataset`, golden output from this Rust operator.
+- `tests/r_golden_pg_data.json` — the R operator's own golden test (15 images, `pg_data.zip`), kept as the parity check: same columns, same values. `documentId` is skipped because the harness assigns it.

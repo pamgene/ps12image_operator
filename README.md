@@ -1,6 +1,13 @@
-# ps12image_rust_operator
+# ps12image operator
 
-Pure-Rust port of [`pamgene/ps12image_operator`](https://github.com/pamgene/ps12image_operator).
+Extracts tags from PamStation-12 TIFF images into a Tercen table.
+
+Since **2.0.0** this is a Rust implementation (developed as
+[`tercen/ps12image_rust_operator`](https://github.com/tercen/ps12image_rust_operator)
+and merged here with its history). The R implementation is tag
+[`1.2.2`](https://github.com/pamgene/ps12image_operator/tree/1.2.2). The
+operator name (`PS12 images`), input projection and output columns are
+unchanged, so existing steps keep working after a version bump.
 
 Extracts PamStation-12 image **metadata** into a Tercen table: given a
 `documentId` column factor referencing an image ZIP, it downloads the
@@ -19,12 +26,14 @@ data is decoded.
   2. Flat: `*.tif` at the archive root (fallback, with a warning — the R
      original crashed on these).
 
-Test data: [`tercen/pamchip_grid_dataset`](https://github.com/tercen/pamchip_grid_dataset)
-— `641129101/641129101_ImageResults.zip`.
+Tercen unit tests (`tests/`): the Rust golden test on 4 images from
+[`tercen/pamchip_grid_dataset`](https://github.com/tercen/pamchip_grid_dataset),
+and the R operator's original golden test (`pg_data.zip`, 15 images) kept as
+the parity check.
 
 ## Output
 
-One row per image, `.ci = 0` (matching the R original):
+One row per image, `.ci = 0` (as the R original):
 `documentId, path, Image, DateTime, Barcode, Col, Cycle, Exposure Time,
 Filter, PS12, Row, Temperature, Timestamp, Instrument Unit, RunId` —
 `Col/Cycle/Exposure Time/Row/Temperature` numeric, the rest strings,
@@ -48,8 +57,10 @@ export TERCEN_URI=... TERCEN_TOKEN=... WORKFLOW_ID=... STEP_ID=...
 OUTPUT_CSV=/tmp/out.csv cargo run --bin dev
 ```
 
-`operator.json`'s `container` must pin the release tag before tagging
-(see CLAUDE.md release rules).
+`operator.json`'s `container` must pin the release tag
+(`ghcr.io/pamgene/ps12image_operator:X.Y.Z`) before tagging — see CLAUDE.md.
+The image is built and pushed by the release workflow on the tag; the
+package must be public on ghcr.io for the workers to pull it.
 
 ## Memory
 
