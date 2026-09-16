@@ -1,0 +1,27 @@
+{
+  "kind": "OperatorUnitTest",
+  "name": "r_golden_pg_data_15_images",
+  "namespace": "ds0",
+  "inputFileUris": [
+    "pg_data.zip"
+  ],
+  "inputDataUri": "input.csv",
+  "outputDataUri": [
+    "table1.csv",
+    "table2.csv"
+  ],
+  "columns": [
+    "documentId"
+  ],
+  "rows": [],
+  "colors": [],
+  "labels": [],
+  "yAxis": "",
+  "xAxis": "",
+  "equalityMethod": "R2",
+  "r2": 0.99,
+  "skipColumns": [
+    "ds0.documentId",
+    "documentId"
+  ]
+}

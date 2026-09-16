@@ -1,8 +1,17 @@
 {
   "name": "PS12 images",
-  "description": "Convert a zip file of tif images to a Tercen data set.",
-  "tags": ["tif", "import"],
-  "authors": ["tercen"],
-  "urls": ["https://github.com/pamgene/ps12image_operator"],
-  "properties": []
+  "description": "Extracts PamStation-12 image metadata (PS12 TIFF tags) from an image ZIP into a table: one row per image with barcode, row/col, cycle, exposure time, filter, temperature and timestamps. Rust implementation since 2.0.0 (the R implementation is tag 1.2.2); same columns, no pixel data is decoded.",
+  "tags": [
+    "tif",
+    "import",
+    "image analysis"
+  ],
+  "communicationProtocol": "grpc",
+  "authors": [
+    "tercen"
+  ],
+  "urls": [
+    "https://github.com/pamgene/ps12image_operator"
+  ],
+  "container": "ghcr.io/pamgene/ps12image_operator:2.0.0"
 }

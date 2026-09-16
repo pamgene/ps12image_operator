@@ -1,8 +1,2 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-packrat/lib*/
-packrat/src
-workspace.R
+target/
 .idea
