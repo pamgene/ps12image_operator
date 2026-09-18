@@ -2,5 +2,12 @@
   "kind": "OperatorEstimateModel",
   "intercept": 200.0,
   "offset": 0.0,
-  "features": []
+  "features": [
+    {
+      "kind": "Feature",
+      "name": "files_size",
+      "coefficient": 1.0,
+      "exponent": 0.0
+    }
+  ]
 }
